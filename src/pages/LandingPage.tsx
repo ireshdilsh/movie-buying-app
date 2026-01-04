@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import dark_logo from '../assets/dark_logo.png'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid';
+import { useState } from "react";
+import dark_logo from "../assets/dark_logo.png";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -11,11 +11,12 @@ const navigation = [
 ];
 
 export default function LandingPage() {
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div>
-      <header className="flex items-center justify-between px-25 py-4">
+    <div className="min-h-screen bg-white text-black">
+      {/* HEADER */}
+      <header className="flex items-center justify-between px-8 sm:px-12 lg:px-20 py-4 border-b border-b-neutral-100">
         <div className="flex items-center gap-2">
           <img src={dark_logo} alt="MAG Logo" className="h-8" />
         </div>
@@ -26,6 +27,7 @@ export default function LandingPage() {
             <a
               key={item.name}
               href={item.href}
+              className="text-gray-700 hover:text-black transition"
             >
               {item.name}
             </a>
@@ -37,17 +39,17 @@ export default function LandingPage() {
           className="md:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
-          <Bars3Icon className="h-7 w-7" />
+          <Bars3Icon className="h-6 w-6 cursor-pointer" />
         </button>
       </header>
 
       {/* MOBILE MENU */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-50 p-6">
+        <div className="fixed inset-0 bg-white text-neutral-800 z-50 p-6">
           <div className="flex justify-between items-center">
-            <span className="text-xl font-bold">MAG</span>
+            <img src={dark_logo} alt="dark-logo" className="h-8" />
             <button onClick={() => setMobileMenuOpen(false)}>
-              <XMarkIcon className="h-7 w-7" />
+              <XMarkIcon className="h-6 w-6 cursor-pointer" />
             </button>
           </div>
 
@@ -56,6 +58,7 @@ export default function LandingPage() {
               <a
                 key={item.name}
                 href={item.href}
+                className=" text-gray-300 hover:text-white"
               >
                 {item.name}
               </a>
@@ -64,28 +67,87 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* hero section */}
-      <section className="flex flex-col items-start justify-start px-6 mt-24 lg:px-25 max-w-4xl">
-        <h1 className="text-4xl md:text-6xl font-medium tracking-tight">
-         Your Movie Night <br /> Starts Here.
-        </h1>
+      {/* HERO SECTION */}
+      <section
+        className="
+          flex flex-col
+          items-start
+          px-8 sm:px-12 lg:px-20
+          mt-16 sm:mt-20 lg:mt-24
+          mx-auto
+        "
+      >
+        <div>
+          <h1
+            className="
+            text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+            font-medium
+            tracking-tight
+            leading-tight
+          "
+          >
+            Your Movie Night <br className="hidden sm:block" /> Starts Here.
+          </h1>
 
-        <p className="mt-6 max-w-3xl text-gray-600">
-          Discover the latest movies, choose your perfect seat, and book tickets
-          instantly. MAG makes movie nights effortless and unforgettable.
-        </p>
+          <p
+            className="
+            mt-4 sm:mt-6
+            max-w-xl sm:max-w-2xl
+            text-gray-600
+            text-sm sm:text-base
+          "
+          >
+            Discover the latest movies, choose your perfect seat, and book tickets
+            instantly. MAG makes movie nights effortless and unforgettable.
+          </p>
 
-        <div className="mt-8 flex gap-4">
-          <button className="bg-amber-500 hover:opacity-85 cursor-pointer px-6 py-3 rounded-lg font-medium flex justify-center items-center gap-2.5">
-            Buy New Movies
-            <img src="https://img.icons8.com/?size=100&id=59842&format=png&color=000000" className='w-5' alt="movie-icon" />
-          </button>
-          <button className="border border-gray-600 hover:border-white px-6 py-3 rounded-lg">
-            Explore More
-          </button>
+          <div
+            className="
+            mt-6 sm:mt-8
+            flex flex-col sm:flex-row
+            gap-4
+            w-full sm:w-auto
+          "
+          >
+            <button
+              className="
+              bg-amber-500 hover:opacity-85
+              px-6 py-3
+              rounded-lg
+              font-medium
+              flex items-center justify-center gap-3
+              w-full sm:w-auto
+              cursor-pointer
+            "
+            >
+              Buy New Movies
+              <img
+                src="https://img.icons8.com/?size=100&id=59842&format=png&color=000000"
+                className="w-5"
+                alt="movie-icon"
+              />
+            </button>
+
+            <button
+              className="
+              px-6 py-3
+              rounded-lg
+              border border-gray-600
+              flex items-center justify-center gap-3
+              w-full sm:w-auto
+              cursor-pointer
+            "
+            >
+              Explore More
+              <img
+                src="https://img.icons8.com/?size=100&id=99416&format=png&color=000000"
+                className="w-5"
+                alt="right-arrow"
+              />
+            </button>
+          </div>
         </div>
       </section>
-
     </div>
-  )
+  );
 }
