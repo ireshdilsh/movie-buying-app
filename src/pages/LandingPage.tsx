@@ -151,8 +151,9 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* MOVIES SECTION */}
       <section id="movies" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto flex flex-col justify-center items-center">
-        <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">
           Now Showing
         </h1>
 
@@ -162,6 +163,14 @@ export default function LandingPage() {
 
         {/* movie cards */}
 
+      </section>
+
+      {/* SERVICES SECTION */}
+      <section id="services" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto">
+        <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">Experience the Magic of Cinema</h1>
+        <p className="mt-4 sm:mt-2 text-gray-600 font-medium max-w-xl sm:max-w-2xl text-sm sm:text-base">
+         Enjoy the full theater experience with MAG. Browse trending movies, watch trailers, reserve seats, and make every movie night unforgettable.
+        </p>
       </section>
 
     </div>
