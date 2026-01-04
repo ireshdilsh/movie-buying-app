@@ -78,6 +78,7 @@ export default function LandingPage() {
         "
       >
         <div>
+          <p className="text-sm text-gray-500 border mb-2 border-neutral-100 px-3 py-1 rounded-2xl w-84.5">Experience Cinema Like Never Before on MAG.</p>
           <h1
             className="
             text-3xl sm:text-4xl md:text-5xl lg:text-6xl
@@ -95,6 +96,7 @@ export default function LandingPage() {
             max-w-xl sm:max-w-2xl
             text-gray-600
             text-sm sm:text-base
+            font-medium
           "
           >
             Discover the latest movies, choose your perfect seat, and book tickets
