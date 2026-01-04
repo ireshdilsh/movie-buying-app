@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
   { name: "Home", href: "#" },
   { name: "Movies", href: "#movies" },
-  { name: "Showtimes", href: "#showtimes" },
+  { name: "Services", href: "#services" },
   { name: "About", href: "#about" },
   { name: "Sign In", href: "#signin" },
 ];
@@ -150,6 +150,20 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <section id="movies" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto flex flex-col justify-center items-center">
+        <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">
+          Now Showing
+        </h1>
+
+        <p className="mt-4 sm:mt-2 text-center text-gray-600 font-medium max-w-xl sm:max-w-2xl text-sm sm:text-base">
+          Explore the latest releases and trending movies. Watch trailers, check showtimes, and book your seats in just a few clicks.
+        </p>
+
+        {/* movie cards */}
+
+      </section>
+
     </div>
   );
 }

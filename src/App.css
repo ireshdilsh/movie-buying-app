@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 
-h1 ,button ,a{
+button,
+a {
       font-family: 'Gabarito';
+      color: #333;
+}
+
+h1 {
+      font-family: "MuseoModerno", cursive;
       color: #333;
 }
 
