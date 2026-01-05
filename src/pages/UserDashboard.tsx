@@ -9,7 +9,7 @@ export default function UserDashboard() {
         <div className="flex flex-col justify-center items-center px-4 sm:px-6">
 
             {/* user navbar */}
-            <nav className="flex justify-between items-center w-full mt-5 px-5 sm:px-8 md:px-12 lg:px-20">
+            <nav className="flex justify-between items-center w-full mt-5 px-5 sm:px-8 md:px-12 lg:px-20 border-b border-b-neutral-100 pb-3">
                 <img src={dark_logo} className="h-6 sm:h-7" alt="Dark-Logo" />
 
                 {/* Desktop Menu */}
@@ -22,7 +22,8 @@ export default function UserDashboard() {
 
             <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
 
-                <p className="text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
+                <p className="flex justify-center items-center gap-2 text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
+                    <div className='bg-amber-500 rounded-full h-2.5 w-2.5'></div>
                     Explore, search, buying, and book instantly
                 </p>
 
