@@ -6,7 +6,6 @@ import UserDashboard from './pages/UserDashboard'
 export default function NavigateRoutes() {
   return (
     <div>                                           
-     {/* <LandingPage/> */}
      <BrowserRouter>
       <Routes>
         <Route path='/' element={<LandingPage/>}></Route>
