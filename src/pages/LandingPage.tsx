@@ -78,7 +78,7 @@ export default function LandingPage() {
         "
       >
         <div>
-          <p className="text-sm text-gray-500 border mb-2 border-neutral-100 px-3 py-1 rounded-2xl w-84.5">Experience Cinema Like Never Before on MAG.</p>
+          <p className="text-sm text-gray-500 border mb-2 border-neutral-200 px-3 py-1 rounded-2xl w-84.5">Experience Cinema Like Never Before on MAG.</p>
           <h1
             className="
             text-3xl sm:text-4xl md:text-5xl lg:text-6xl
@@ -153,6 +153,9 @@ export default function LandingPage() {
 
       {/* MOVIES SECTION */}
       <section id="movies" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto flex flex-col justify-center items-center">
+       
+       <p className="text-sm text-gray-600 rounded-3xl px-2 py-1 border border-neutral-200 mb-2">Discover what’s playing near you</p>
+
         <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">
           Now Showing
         </h1>
@@ -167,16 +170,29 @@ export default function LandingPage() {
 
       {/* SERVICES SECTION */}
       <section id="services" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto">
-      
+        <p className="text-sm text-gray-600 rounded-3xl px-2 py-1 border border-neutral-200 w-59 mb-2">Smart features for cinema lovers</p>
         <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">Experience the Magic of Cinema</h1>
-      
+
         <p className="mt-4 sm:mt-2 text-gray-600 font-medium max-w-xl sm:max-w-2xl text-sm sm:text-base">
-         Enjoy the full theater experience with MAG. Browse trending movies, watch trailers, reserve seats, and make every movie night unforgettable.
+          Enjoy the full theater experience with MAG. Browse trending movies, watch trailers, reserve seats, and make every movie night unforgettable.
         </p>
 
         {/* Service Cards */}
       </section>
 
+      <section id="about" className="flex justify-center items-center flex-col px-8 lg:px-20 sm:px-12 mt-12 sm:mt-16 lg:mt-24 mx-auto">
+        <p className="text-sm px-2 py-1 rounded-3xl border border-neutral-200 mb-2 text-gray-600">Bringing the magic of cinema closer to you</p>
+        <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">About MAG</h1>
+        <p className="mt-4 sm:mt-2 text-gray-600 font-medium max-w-xl sm:max-w-2xl text-sm sm:text-base text-center">MAG is a modern movie ticket booking platform that makes discovering movies, choosing seats, and booking tickets fast, easy, and hassle-free.</p>
+        <div className="flex">
+          <div>
+            {/* paragraph text */}
+          </div>
+          <div>
+            {/* images sets */}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
