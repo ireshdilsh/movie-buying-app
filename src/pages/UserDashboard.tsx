@@ -15,12 +15,9 @@ export default function UserDashboard() {
 
                 {/* Desktop Menu */}
                 <div className="hidden sm:flex justify-center items-center gap-4 md:gap-6">
-                    <a href="#">Home</a>
-                    <a href="#">Home</a>
-                    <a href="#">Home</a>
-                    <a href="#">Home</a>
-                    <a href="#">Home</a>
-                    <a href="#">Home</a>
+                   <div className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
+                    <p className="text-white font-semibold text-sm">ID</p>
+                   </div>
                 </div>
 
                 {/* Mobile Button */}
@@ -54,7 +51,7 @@ export default function UserDashboard() {
                 </div>
             )}
 
-            <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-50">
+            <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
 
                 <p className="text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
                     Explore, search, buying, and book instantly
