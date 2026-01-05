@@ -1,10 +1,7 @@
 import dark_logo from '../assets/dark_logo.png'
-import { useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function UserDashboard() {
 
-    const [open, setOpen] = useState(false)
 
     return (
         <div className="flex flex-col justify-center items-center px-4 sm:px-6">
@@ -14,42 +11,12 @@ export default function UserDashboard() {
                 <img src={dark_logo} className="h-6 sm:h-7" alt="Dark-Logo" />
 
                 {/* Desktop Menu */}
-                <div className="hidden sm:flex justify-center items-center gap-4 md:gap-6">
+                <div className=" sm:flex justify-center items-center gap-4 md:gap-6">
                    <div className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
                     <p className="text-white font-semibold text-sm">ID</p>
                    </div>
                 </div>
-
-                {/* Mobile Button */}
-                <button
-                    className="sm:hidden"
-                    onClick={() => setOpen(true)}
-                >
-                    <Bars3Icon className="w-6 h-6 cursor-pointer" />
-                </button>
             </nav>
-
-            {/* Mobile Menu */}
-            {open && (
-                <div className="sm:hidden fixed inset-0 bg-black/20 bg-opacity-50 z-50 flex justify-end">
-                    <div className="bg-white w-64 h-full p-4">
-                        <button
-                            className="mb-4"
-                            onClick={() => setOpen(false)}
-                        >
-                            <XMarkIcon className="w-6 h-6 cursor-pointer" />
-                        </button>
-                        <nav className="flex flex-col gap-4">
-                            <a href="#">Home</a>
-                            <a href="#">Home</a>
-                            <a href="#">Home</a>
-                            <a href="#">Home</a>
-                            <a href="#">Home</a>
-                            <a href="#">Home</a>
-                        </nav>
-                    </div>
-                </div>
-            )}
 
             <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
 
