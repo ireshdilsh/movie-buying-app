@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import dark_logo from '../assets/dark_logo.png'
 
 export default function UserDashboard() {
 
+    const [profile, setprofile] = useState(false);
 
     return (
         <div className="flex flex-col justify-center items-center px-4 sm:px-6">
@@ -12,9 +14,9 @@ export default function UserDashboard() {
 
                 {/* Desktop Menu */}
                 <div className=" sm:flex justify-center items-center gap-4 md:gap-6">
-                   <div className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
-                    <p className="text-white font-semibold text-sm">ID</p>
-                   </div>
+                    <div onClick={()=>{setprofile(true)}} className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
+                        <p className="text-white font-semibold text-sm">ID</p>
+                    </div>
                 </div>
             </nav>
 
@@ -42,8 +44,28 @@ export default function UserDashboard() {
                         <img src="https://img.icons8.com/?size=100&id=59878&format=png&color=ffffff" className="w-5 h-5 " alt="search icon" />
                     </button>
                 </div>
-
             </div>
+
+            {/* profile */}
+            { profile && (
+                <div className='flex justify-center items-center flex-col px-5 py-2 bg-white border border-neutral-100 rounded-sm absolute top-15 right-25'>
+                    <div className='flex flex-col w-full'>
+                        <button className='w-full flex justify-end items-end mt-4 mb-2 cursor-pointer' onClick={()=>{setprofile(false)}}>
+                            <img src="https://img.icons8.com/?size=100&id=82771&format=png&color=000000" className='h-4' alt="close-icon" />
+                        </button>
+                       <div className='flex justify-center items-center gap-4 w-full border-b border-neutral-200 pb-4'>
+                           <div className='flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
+                        <p className="text-white font-semibold text-sm">ID</p>
+                    </div>
+                            <div>
+                                 <p className='text-gray-600 font-semibold'>Iresh Dilshan</p>
+                        <p className='text-sm text-gray-900'>ireshsilva1234@gmail.com</p>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            )}
+
         </div>
 
     )
