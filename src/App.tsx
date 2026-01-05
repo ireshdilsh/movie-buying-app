@@ -1,11 +1,11 @@
 import React from 'react'
-import Routes from './Routes'
 import './App.css'
+import NavigateRoutes from './NavigateRoutes'
 
 export default function App() {
   return (
     <div>
-      <Routes/>
+      <NavigateRoutes/>
     </div>
   )
 }

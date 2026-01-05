@@ -124,7 +124,7 @@ export default function LandingPage() {
               w-full sm:w-auto
               cursor-pointer
             "
-              onClick={() => { setlogin(true) }}
+              onClick={() => { setregister(true) }}
             >
               Buy New Movies
               <img
@@ -143,6 +143,8 @@ export default function LandingPage() {
               w-full sm:w-auto
               cursor-pointer
             "
+
+            onClick={()=>{setlogin(true)}}
             >
               Explore More
               <img
@@ -267,7 +269,7 @@ export default function LandingPage() {
             </button>
             <div className="flex justify-between items-center w-95">
               <p className="text-sm sm:text-sm mt-4">Don't have an account?</p>
-              <a href="#" className="text-sm sm:text-sm font-medium hover:underline mt-4" onClick={()=>{setlogin(false); setregister(true);}}>Sign Up</a>
+              <a href="#" className="text-sm sm:text-base font-medium hover:underline mt-4" onClick={()=>{setlogin(false); setregister(true);}}>Sign Up</a>
             </div>
           </div>
         </div>
@@ -340,7 +342,7 @@ export default function LandingPage() {
             </button>
             <div className="flex justify-between items-center w-95">
               <p className="text-sm sm:text-sm mt-4">Don't have an account?</p>
-              <a href="#" className="text-sm font-medium sm:text-sm hover:underline mt-4" onClick={()=>{setlogin(true);setregister(false);}}>Sign In</a>
+              <a href="#" className="text-sm font-medium sm:text-base hover:underline mt-4" onClick={()=>{setlogin(true);setregister(false);}}>Sign In</a>
             </div>
           </div>
         </div>
