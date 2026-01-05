@@ -199,26 +199,75 @@ export default function LandingPage() {
 
       {/* Login */}
       {login && (
-        <div className="flex justify-center items-center fixed inset-0 bg-black/50 z-50">
-          <div className="bg-white rounded-sm py-5 px-10 flex justify-center items-center flex-col">
-            <div className="w-full bg-amber-500 h-1"></div>
-            <img src={dark_logo} alt="dark-logo" className="w-18 my-4" />
-            <h1 className="text-xl font-semibold">Welcome Back</h1>
-            <p className="text-sm text-gray-600">Access your account to explore movies and book tickets instantly.</p>
-            <div className="w-90">
+        <div className="flex justify-center items-center fixed inset-0 bg-black/50 z-50 px-4 sm:px-6">
+          <div className="bg-white rounded-sm py-8 sm:py-10 px-6 sm:px-10 flex flex-col justify-center items-center w-full max-w-md sm:max-w-lg">
+
+            {/* Close Button */}
+            <div className="w-full flex justify-end cursor-pointer" onClick={() => setlogin(false)}>
+              <img
+                src="https://img.icons8.com/?size=100&id=83149&format=png&color=000000"
+                alt="close-icon"
+                className="h-5 sm:h-6"
+              />
+            </div>
+
+            {/* Logo */}
+            <img src={dark_logo} alt="dark-logo" className="w-20 sm:w-20 my-2" />
+
+            {/* Heading */}
+            <h1 className="sm:text-xl font-semibold mt-2 text-center">Welcome Back</h1>
+
+            {/* Description */}
+            <p className="text-sm sm:text-sm text-gray-600 text-center mt-1 sm:mt-2">
+              Access your account to explore movies and book tickets instantly.
+            </p>
+
+            {/* Form */}
+            <div className="w-95 mt-4 sm:mt-6 flex flex-col gap-2">
               <div id="email-address" className="flex flex-col">
-                <label className="text-sm font-medium mt-4 mb-1">Email Address</label>
-                <input type="email" className="border border-gray-300 rounded-md px-3 py-2" />
+                <label className="text-sm sm:text-base font-medium mb-1">Email Address</label>
+                <input
+                  type="email"
+                  className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
+                />
               </div>
               <div id="password" className="flex flex-col">
-                <label className="text-sm font-medium mt-4 mb-1">Password</label>
-                <input type="password" className="border border-gray-300 rounded-md px-3 py-2" />
+                <label className="text-sm sm:text-base font-medium mb-1">Password</label>
+                <input
+                  type="password"
+                  className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
+                />
               </div>
-              <button className="bg-amber-500 hover:opacity-85 px-6 py-2 rounded-lg font-medium mt-6 w-full">Sign In</button>
+              <div className="flex justify-between items-center mt-2">
+                <div className="flex items-center">
+                  <input type="checkbox" id="remember-me" className="mr-2" />
+                  <label htmlFor="remember-me" className="text-sm sm:text-base">Remember Me</label>
+                </div>
+                <div>
+                  <a href="#" className="text-sm sm:text-base text-amber-500 hover:underline">Forgot Password?</a>
+                </div>
+              </div>
+              <button className="bg-amber-500 hover:opacity-85 px-6 py-2 sm:py-2 rounded-lg font-medium mt-2 sm:mt-2 w-full cursor-pointer text-sm sm:text-base">
+                Authorization
+              </button>
             </div>
+
+            {/* Divider */}
+            <div className="w-95 bg-neutral-200 h-[1px] mt-4 sm:mt-5"></div>
+
+            {/* Continue With Google */}
+            <button className="mt-3 sm:mt-4 px-6 py-2 sm:py-2 border border-gray-300 rounded-lg font-medium cursor-pointer w-95 flex justify-center items-center gap-3 sm:gap-7 text-sm sm:text-base">
+              Continue With Google
+              <img
+                src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
+                alt="google-icon"
+                className="w-4 sm:w-5"
+              />
+            </button>
           </div>
         </div>
       )}
+
 
     </div>
   );
