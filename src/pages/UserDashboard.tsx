@@ -49,18 +49,18 @@ export default function UserDashboard() {
             {/* profile */}
             {profile && (
                 <div className="
-    absolute
-    top-14 sm:top-15
-    right-3 sm:right-10 lg:right-25
-    w-72 sm:w-80
-    flex flex-col
-    px-4 sm:px-5 py-3
-    bg-white
-    border border-neutral-100
-    rounded-md
-    shadow-md
-    z-50
-  ">
+                    absolute
+                    top-14 sm:top-15
+                    right-3 sm:right-10 lg:right-25
+                    w-72 sm:w-80
+                    flex flex-col
+                    px-4 sm:px-5 py-3
+                    bg-white
+                    border border-neutral-100
+                    rounded-md
+                    shadow-md
+                    z-50
+                ">
                     {/* Close button */}
                     <button
                         className="w-full flex justify-end items-end mb-2 cursor-pointer"
@@ -96,9 +96,10 @@ export default function UserDashboard() {
                             Favourites
                         </button>
 
+                        {/* NEW: Bookings */}
                         <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
                             <img
-                                src="https://img.icons8.com/?size=100&id=62161&format=png&color=000000"
+                                src="https://img.icons8.com/?size=100&id=114034&format=png&color=000000"
                                 className="h-4"
                                 alt="bookings-icon"
                             />
