@@ -13,6 +13,8 @@ const navigation = [
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [login, setlogin] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-black">
       {/* HEADER */}
@@ -121,6 +123,7 @@ export default function LandingPage() {
               w-full sm:w-auto
               cursor-pointer
             "
+              onClick={() => { setlogin(true) }}
             >
               Buy New Movies
               <img
@@ -153,8 +156,8 @@ export default function LandingPage() {
 
       {/* MOVIES SECTION */}
       <section id="movies" className="px-8 sm:px-12 lg:px-20 mt-12 sm:mt-16 lg:mt-24 mx-auto flex flex-col justify-center items-center">
-       
-       <p className="text-sm text-gray-600 rounded-3xl px-2 py-1 border border-neutral-200 mb-2">Discover what’s playing near you</p>
+
+        <p className="text-sm text-gray-600 rounded-3xl px-2 py-1 border border-neutral-200 mb-2">Discover what’s playing near you</p>
 
         <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">
           Now Showing
@@ -193,6 +196,30 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Login */}
+      {login && (
+        <div className="flex justify-center items-center fixed inset-0 bg-black/50 z-50">
+          <div className="bg-white rounded-sm py-5 px-10 flex justify-center items-center flex-col">
+            <div className="w-full bg-amber-500 h-1"></div>
+            <img src={dark_logo} alt="dark-logo" className="w-18 my-4" />
+            <h1 className="text-xl font-semibold">Welcome Back</h1>
+            <p className="text-sm text-gray-600">Access your account to explore movies and book tickets instantly.</p>
+            <div className="w-90">
+              <div id="email-address" className="flex flex-col">
+                <label className="text-sm font-medium mt-4 mb-1">Email Address</label>
+                <input type="email" className="border border-gray-300 rounded-md px-3 py-2" />
+              </div>
+              <div id="password" className="flex flex-col">
+                <label className="text-sm font-medium mt-4 mb-1">Password</label>
+                <input type="password" className="border border-gray-300 rounded-md px-3 py-2" />
+              </div>
+              <button className="bg-amber-500 hover:opacity-85 px-6 py-2 rounded-lg font-medium mt-6 w-full">Sign In</button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
