@@ -50,3 +50,29 @@ export const getMovies = async (req: any, res: any) => {
         return res.status(500).json({ message: 'Error fetching movies', error });
     }
 }
+
+export const getMovieById = async (req: any, res: any) => {
+    try {
+        const {id} = req.params;
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        return res.status(200).json({ movie });
+    } catch (error) {
+        return res.status(500).json({ message: 'Error fetching movie', error });
+    }
+}
+
+export const deleteMovie = async (req: any, res: any) => {
+    try {
+        const {id} = req.params;
+        const deletedMovie = await Movie.findByIdAndDelete(id);
+        if (!deletedMovie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        return res.status(200).json({ message: 'Movie deleted successfully' });
+    } catch (error) {
+        return res.status(500).json({ message: 'Error deleting movie', error });
+    }
+}
