@@ -1,8 +1,13 @@
 import React from 'react'
+import AdminNavbar from '../component/AdminNavbar'
 
 export default function AdminDashboard() {
     return (
-        <div className='w-full flex justify-center items-center flex-col'>
+        <div className='flex flex-col px-4 sm:px-6'>
+
+            {/* admin navbar */}
+            <AdminNavbar/>
+
             <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
 
                 <p className="flex justify-center items-center gap-2 text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
