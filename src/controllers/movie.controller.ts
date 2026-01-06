@@ -23,7 +23,7 @@ export const saveMovie = async (req: any, res: any) => {
                 uploadStream.end(req.file.buffer);
             });
 
-            bannerURL = uploadResult.secure_url;  // ✔ Now safe
+            bannerURL = uploadResult.secure_url; 
         }
         const newMovie = new Movie({
             name,
