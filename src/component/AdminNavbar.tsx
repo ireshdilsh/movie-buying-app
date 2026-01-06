@@ -12,7 +12,6 @@ export default function AdminNavbar() {
                     <a href="http://">Add Movie</a>
                     <a href="http://">Manage Users</a>
                     <a href="http://">Manage Movies</a>
-                    <a href=""></a>
                     <div className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
                         <p className="text-white font-semibold text-sm">ID</p>
                     </div>
