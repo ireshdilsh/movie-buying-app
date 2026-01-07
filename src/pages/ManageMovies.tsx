@@ -11,7 +11,7 @@ export default function ManageMovies() {
 
                 <p className="flex justify-center items-center gap-2 text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
                     <div className='bg-amber-500 rounded-full h-2.5 w-2.5'></div>
-                    View, Update & Remove Films
+                    View, Update & Remove Movies
                 </p>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl my-2 font-medium text-center tracking-tight">

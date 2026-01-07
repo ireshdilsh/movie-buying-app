@@ -11,7 +11,6 @@ export default function UserDashboard() {
             <UserNavbar/>
 
             <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
-
                 <p className="flex justify-center items-center gap-2 text-sm sm:text-sm text-gray-600 font-medium border border-neutral-200 px-3 py-1 rounded-3xl text-center">
                     <div className='bg-amber-500 rounded-full h-2.5 w-2.5'></div>
                     Explore, search, buying, and book instantly
