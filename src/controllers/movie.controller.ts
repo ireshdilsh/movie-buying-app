@@ -49,6 +49,7 @@ export const saveMovie = async (req: any, res: any) => {
         });
     }
 };
+
 export const getMovies = async (req: any, res: any) => {
     try {
         const movies = await Movie.find();
