@@ -43,7 +43,7 @@ export default function ManageMovies() {
       </div>
 
       {/* loading all movies cards */}
-      <div className='mt-10 flex justify-center items-center'>
+      <div className='mt-15 flex justify-center items-center'>
         <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {
             movie.map((mov, index) => (
