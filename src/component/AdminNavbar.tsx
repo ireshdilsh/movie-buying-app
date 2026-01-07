@@ -29,7 +29,7 @@ export default function AdminNavbar() {
                     <button className='cursor-pointer text-sm'>Manage Users</button>
                     <button onClick={navigateManageMoviesPage} className='cursor-pointer text-sm'>Manage Movies</button>
                     <button className='cursor-pointer text-sm'>Bookings</button>
-                    <button className='cursor-pointer text-sm font-medium bg-amber-500 px-4 py-2 rounded-sm'>Sign out</button>
+                    <button className='cursor-pointer text-sm font-medium bg-amber-500 px-4 py-2 rounded-sm hover:opacity-80'>Sign out</button>
                 </div>
             </nav>
         </div>

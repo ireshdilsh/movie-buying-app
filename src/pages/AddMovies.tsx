@@ -31,7 +31,7 @@ export default function AddMovies() {
             <input type="text" className='h-11 mt-1 w-100 border px-4 border-neutral-200 rounded-sm' />
           </div>
           <div className='flex flex-col justify-start items-start'>
-            <p className='text-gray-800 font-medium text-sm'>Description</p>
+            <p className='text-gray-800 font-medium text-sm'>Director</p>
             <input type="text" className='h-11 mt-1 w-100 border px-4 border-neutral-200 rounded-sm' />
           </div>
         </div>
@@ -66,6 +66,9 @@ export default function AddMovies() {
             </button>
         </div>
 
+        <div className='flex justify-end items-end w-205 my-5'>
+          <button className='cursor-pointer bg-amber-500 py-2 px-4 rounded-sm font-medium hover:opacity-80'>Published Movie</button>
+        </div>
       </div>
     </div>
   )
