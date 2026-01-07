@@ -12,7 +12,7 @@ export default function AddMovies() {
   const [name, setname] = useState('');
   const [director, setdirector] = useState('');
   const [description, setdescription] = useState('');
-  const [price, setprice] = useState(0);
+  const [price, setprice] = useState(Number);
   const [file,setFile] = useState<File | null>(null)
   const [imagePriview, setimagePriview] = useState('');
 
@@ -109,8 +109,9 @@ export default function AddMovies() {
           <div className='flex flex-col justify-start items-start'>
             <p className='text-gray-800 font-medium text-sm'>Genre</p>
             <select onChange={(e)=>{setselectedGenre(e.target.value)}} value={selectedGenre} name="" id="" className='w-100 h-11 mt-1 border border-neutral-200 rounded-sm px-4'>
+              <option value="">Select Genre</option>
               {genre && genre.map(gen => (
-                <option value="">{gen.name}</option>
+                <option value={gen.id} key={gen.id}>{gen.name}</option>
               ))}
             </select>
           </div>
