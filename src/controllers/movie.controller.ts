@@ -1,30 +1,29 @@
 import cloudinary from "../config/cloudinary";
 import { Movie } from "../models/movie.model";
 
+
 export const saveMovie = async (req: any, res: any) => {
     try {
         const { name, description, releaseDate, genre, director, price } = req.body;
-        let bannerURL = '';
 
-        let uploadResult: any = null;
+        let bannerURL = "";
 
         if (req.file) {
-            uploadResult = await new Promise((resolve, reject) => {
+            const uploadResult: any = await new Promise((resolve, reject) => {
                 const uploadStream = cloudinary.uploader.upload_stream(
-                    { folder: "posts" },
-                    (error: any, result: any) => {
-                        if (error) {
-                            console.error("Cloudinary error:", error);
-                            return reject(error);
-                        }
+                    { folder: "movies" },
+                    (error, result) => {
+                        if (error) return reject(error);
                         resolve(result);
                     }
                 );
+
                 uploadStream.end(req.file.buffer);
             });
 
-            bannerURL = uploadResult.secure_url; 
+            bannerURL = uploadResult.secure_url;
         }
+
         const newMovie = new Movie({
             name,
             description,
@@ -36,12 +35,20 @@ export const saveMovie = async (req: any, res: any) => {
         });
 
         await newMovie.save();
-        return res.status(201).json({ message: 'Movie saved successfully', movie: newMovie });
-    } catch (error) {
-        return res.status(500).json({ message: 'Error saving movie', error });
-    }
-}
 
+        res.status(201).json({
+            message: "Movie saved successfully",
+            movie: newMovie
+        });
+
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({
+            message: "Error saving movie",
+            error: error.message
+        });
+    }
+};
 export const getMovies = async (req: any, res: any) => {
     try {
         const movies = await Movie.find();
@@ -53,7 +60,7 @@ export const getMovies = async (req: any, res: any) => {
 
 export const getMovieById = async (req: any, res: any) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const movie = await Movie.findById(id);
         if (!movie) {
             return res.status(404).json({ message: 'Movie not found' });
@@ -66,7 +73,7 @@ export const getMovieById = async (req: any, res: any) => {
 
 export const deleteMovie = async (req: any, res: any) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const deletedMovie = await Movie.findByIdAndDelete(id);
         if (!deletedMovie) {
             return res.status(404).json({ message: 'Movie not found' });

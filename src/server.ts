@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors';
 import { connectDB } from "./config/dbConfig";
 import { movie_router } from "./routes/movie.route";
-import { genre_router } from "./routes/genre .route";
+import { genre_router } from "./routes/genre.route";
 // import connectDB from "./config/dbConfig";
 
 const server = express();
