@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import UserNavbar from '../component/UserNavbar';
 import type { Movie } from '../interfaces/movie';
-import { useNavigate, type NavigateFunction } from 'react-router-dom';
+// import { useNavigate, type NavigateFunction } from 'react-router-dom';
 import axios from 'axios';
 
 export default function UserDashboard() {
 
     const [movie, setmovie] = useState<Movie[]>([]);
-    const navigate: NavigateFunction = useNavigate()
+    // const navigate: NavigateFunction = useNavigate()
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/immutability
