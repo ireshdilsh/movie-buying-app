@@ -7,6 +7,7 @@ import { useNavigate, type NavigateFunction } from 'react-router-dom';
 export default function ManageMovies() {
 
   const [movie, setmovie] = useState<Movie[]>([]);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
 
   const navigate : NavigateFunction = useNavigate()
 
@@ -26,7 +27,24 @@ export default function ManageMovies() {
 
   const gotoMovie = (id:string) => {
       navigate(`/get/movie/by/${id}`)
-  } 
+  }
+
+  const toggleMenu = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpenMenuId(openMenuId === id ? null : id);
+  }
+
+  const handleUpdate = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log('Update movie:', id);
+    // Add your update logic here
+  }
+
+  const handleDelete = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log('Delete movie:', id);
+    // Add your delete logic here
+  }
 
   return (
     <div className='flex flex-col px-4 sm:px-6'>
@@ -54,16 +72,41 @@ export default function ManageMovies() {
         <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {
             movie.map((mov, index) => (
-              <div key={index} className='border border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start' onClick={()=>gotoMovie(mov._id)}>
+              <div key={index} className='border cursor-pointer hover:shadow-xl transition-all mb-5 border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={()=>gotoMovie(mov._id)}>
+                {/* Dots menu */}
+                <button 
+                  onClick={(e) => toggleMenu(mov._id, e)}
+                  className='absolute top-3 right-3 p-1 cursor-pointer hover:bg-gray-100 rounded-full'
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 16 16">
+                    <circle cx="8" cy="3" r="1.5"/>
+                    <circle cx="8" cy="8" r="1.5"/>
+                    <circle cx="8" cy="13" r="1.5"/>
+                  </svg>
+                </button>
+
+                {/* Dropdown menu */}
+                {openMenuId === mov._id && (
+                  <div className='absolute top-10 right-3 bg-white border border-neutral-200 rounded-sm shadow-lg z-10 flex flex-col overflow-hidden'>
+                    <button 
+                      onClick={(e) => handleUpdate(mov._id, e)}
+                      className='cursor-pointer px-4 py-2 text-sm text-left hover:bg-blue-50 text-blue-600 whitespace-nowrap'
+                    >
+                      Update
+                    </button>
+                    <button 
+                      onClick={(e) => handleDelete(mov._id, e)}
+                      className='cursor-pointer px-4 py-2 text-sm text-left hover:bg-red-50 text-red-600 whitespace-nowrap'
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+
                 <img src={mov.bannerURL} className='w-full h-40 object-cover rounded-sm' />
-                <h2 className='text-lg font-medium mt-2'>{mov.name}</h2>
-                <p className='text-sm text-gray-600 mt-1'>Director: {mov.director}</p>
-                <p className='text-sm text-gray-600 mt-1'>Genre: {mov.genre}</p>
-                <p className='text-sm text-gray-600 mt-1'>Price: ${mov.price}</p>
-                <div className='mt-3 flex justify-start items-center gap-3'>
-                  <button className='cursor-pointer bg-blue-500 text-white px-3 py-1 rounded-sm text-sm hover:opacity-80'>Update</button>
-                  <button className='cursor-pointer bg-red-500 text-white px-3 py-1 rounded-sm text-sm hover:opacity-80'>Delete</button>
-                </div>
+                <h2 className='font-medium text-xl mt-2'>{mov.name}</h2>
+                <p className='mt-1 mb-2'>Director: {mov.director}</p>
+                <p className='text-sm text-gray-600 mt-1 text-justify'>{mov.description.substring(0,180)}.....</p>
               </div>
             ))
           }

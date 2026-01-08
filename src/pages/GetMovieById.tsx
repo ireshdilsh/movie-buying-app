@@ -25,18 +25,48 @@ export default function GetMovieById() {
         <div className='flex flex-col px-4 sm:px-6'>
             <AdminNavbar />
             <div className='flex justify-center items-center flex-col mt-5'>
-                <div className='flex flex-start items-start flex-col w-200'>
-                    <div className='border flex justify-center items-center gap-3 border-neutral-200 px-4 py-0.5 mt-10 rounded-2xl'>
+                <div className='flex flex-start items-start flex-col 
+                    w-full max-w-5xl'>
+
+                    <div className='border flex justify-center items-center gap-3 
+                      border-neutral-200 px-4 py-0.5 mt-6 sm:mt-10 
+                      rounded-2xl self-start'>
                         <p className='text-sm text-neutral-500'>{movie?.genre}</p>
                         <div className='bg-amber-500 h-2 w-2 rounded-full'></div>
                     </div>
-                    <h1 className='text-3xl font-bold mt-1'>{movie?.name}</h1>
-                    <img src={movie?.bannerURL} alt="banner" className='my-7' />
-                    <p className='text-gray-600 font-medium mt-2 text-justify'>{movie?.description}</p>
-                    <div className='flex justify-between items-center mt-5 w-full my-5'>
-                    <p className='text-gray-900 font-medium border rounded-sm border-neutral-200 px-4 py-1.5'>Directors is {movie?.director}</p>
-                    <p className='text-gray-900 font-medium bg-amber-500 px-4 py-2 rounded-sm'>Rs.{movie?.price}.00</p>
+
+                    <h1 className='text-2xl sm:text-3xl font-bold mt-1'>
+                        {movie?.name}
+                    </h1>
+
+                    {/* Responsive image */}
+                    {movie?.bannerURL && (
+                        <img
+                            src={movie.bannerURL}
+                            alt="banner"
+                            className='my-5 sm:my-7 w-full max-h-[450px] object-cover rounded-lg'
+                        />
+                    )}
+
+                    <p className='text-gray-600 font-medium mt-2 text-justify text-sm sm:text-base'>
+                        {movie?.description}
+                    </p>
+
+                    {/* Responsive bottom section */}
+                    <div className='flex flex-col sm:flex-row 
+                      justify-between items-start sm:items-center 
+                      mt-5 w-full gap-3 my-5'>
+                        <p className='text-gray-900 font-medium border rounded-sm 
+                      border-neutral-200 px-4 py-1.5 text-sm sm:text-base'>
+                            Directors is {movie?.director}
+                        </p>
+
+                        <p className='text-gray-900 font-medium bg-amber-500 
+                      px-4 py-2 rounded-sm text-sm sm:text-base'>
+                            Rs.{movie?.price}.00
+                        </p>
                     </div>
+
                 </div>
             </div>
         </div>
