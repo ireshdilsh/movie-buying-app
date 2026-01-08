@@ -1,4 +1,5 @@
 export interface Movie {
+    movie(movie: Movie): unknown;
     _id: string;
     name: string;
     description: string;

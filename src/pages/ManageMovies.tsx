@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import AdminNavbar from '../component/AdminNavbar'
 import type { Movie } from '../interfaces/movie';
 import axios from 'axios';
+import { useNavigate, type NavigateFunction } from 'react-router-dom';
 
 export default function ManageMovies() {
 
   const [movie, setmovie] = useState<Movie[]>([]);
+
+  const navigate : NavigateFunction = useNavigate()
 
   useEffect(() => {
     const getAllMovies = async () => {
@@ -20,6 +23,10 @@ export default function ManageMovies() {
 
     getAllMovies()
   }, []);
+
+  const gotoMovie = (id:string) => {
+      navigate(`/get/movie/by/${id}`)
+  } 
 
   return (
     <div className='flex flex-col px-4 sm:px-6'>
@@ -47,7 +54,7 @@ export default function ManageMovies() {
         <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {
             movie.map((mov, index) => (
-              <div key={index} className='border border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start'>
+              <div key={index} className='border border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start' onClick={()=>gotoMovie(mov._id)}>
                 <img src={mov.bannerURL} className='w-full h-40 object-cover rounded-sm' />
                 <h2 className='text-lg font-medium mt-2'>{mov.name}</h2>
                 <p className='text-sm text-gray-600 mt-1'>Director: {mov.director}</p>
