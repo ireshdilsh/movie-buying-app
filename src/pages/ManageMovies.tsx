@@ -104,7 +104,7 @@ export default function ManageMovies() {
                 )}
 
                 <img src={mov.bannerURL} className='w-full h-40 object-cover rounded-sm' />
-                <h2 className='font-medium text-xl mt-2'>{mov.name}</h2>
+                <h2 className='font-medium text-xl mt-2 mb-3'>{mov.name}</h2>
                 <p className='mt-1 mb-2'>Director: {mov.director}</p>
                 <p className='text-sm text-gray-600 mt-1 text-justify'>{mov.description.substring(0,180)}.....</p>
               </div>

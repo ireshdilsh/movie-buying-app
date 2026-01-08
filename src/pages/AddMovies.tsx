@@ -55,11 +55,23 @@ export default function AddMovies() {
         }
       });
       console.log(resp.data);
+      clearFields();
       alert("Movie added successfully!");
     } catch (error) {
       console.log("Error adding movie:", error);
+      clearFields();
       alert("Failed to add movie. Please try again.");
     }
+  }
+
+  const clearFields = () => {
+    setname('');
+    setdirector('');
+    setdescription('');
+    setprice(0);
+    setselectedGenre('');
+    setFile(null);
+    setimagePriview('');
   }
 
   return (

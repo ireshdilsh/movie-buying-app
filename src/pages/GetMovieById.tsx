@@ -31,20 +31,20 @@ export default function GetMovieById() {
                     <div className='border flex justify-center items-center gap-3 
                       border-neutral-200 px-4 py-0.5 mt-6 sm:mt-10 
                       rounded-2xl self-start'>
-                        <p className='text-sm text-neutral-500'>{movie?.genre}</p>
+                        <h2 className='text-sm text-neutral-500'>{movie?.genre}</h2>
                         <div className='bg-amber-500 h-2 w-2 rounded-full'></div>
                     </div>
 
-                    <h1 className='text-2xl sm:text-3xl font-bold mt-1'>
+                    <h2 className='text-2xl sm:text-3xl font-bold mt-1'>
                         {movie?.name}
-                    </h1>
+                    </h2>
 
                     {/* Responsive image */}
                     {movie?.bannerURL && (
                         <img
                             src={movie.bannerURL}
                             alt="banner"
-                            className='my-5 sm:my-7 w-full max-h-[450px] object-cover rounded-lg'
+                            className='my-5 sm:my-7 w-full max-h-[450px] object-cover'
                         />
                     )}
 
@@ -56,15 +56,15 @@ export default function GetMovieById() {
                     <div className='flex flex-col sm:flex-row 
                       justify-between items-start sm:items-center 
                       mt-5 w-full gap-3 my-5'>
-                        <p className='text-gray-900 font-medium border rounded-sm 
+                        <h2 className='text-gray-900 font-medium border rounded-sm 
                       border-neutral-200 px-4 py-1.5 text-sm sm:text-base'>
                             Directors is {movie?.director}
-                        </p>
+                        </h2>
 
-                        <p className='text-gray-900 font-medium bg-amber-500 
+                        <h2 className='text-gray-900 font-medium bg-amber-500 
                       px-4 py-2 rounded-sm text-sm sm:text-base'>
                             Rs.{movie?.price}.00
-                        </p>
+                        </h2>
                     </div>
 
                 </div>
