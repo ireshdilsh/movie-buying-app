@@ -12,6 +12,7 @@ export default function ManageMovies() {
   const navigate: NavigateFunction = useNavigate()
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/immutability
     getAllMovies()
   }, []);
 
@@ -120,7 +121,5 @@ export default function ManageMovies() {
     </div>
   )
 }
-function getAllMovies() {
-  throw new Error('Function not implemented.');
-}
+
 

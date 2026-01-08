@@ -1,12 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminNavbar from '../component/AdminNavbar'
+import type { Movie } from '../interfaces/movie';
+import axios from 'axios';
+import { useNavigate, type NavigateFunction } from 'react-router-dom';
 
 export default function AdminDashboard() {
+
+    const [movie, setmovie] = useState<Movie[]>([]);
+    const navigate : NavigateFunction = useNavigate()
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/immutability
+        getAllMovies()
+    }, []);
+
+    const getAllMovies = async () => {
+        try {
+            const resp = await axios.get('http://localhost:5000/api/movies/get/movies');
+            console.log("Movies data:", resp.data.movies);
+            setmovie(resp.data.movies);
+        } catch (error) {
+            console.log("Error fetching movies:", error);
+        }
+    }
+
+    const gotoMovie = (id: string) => {
+        navigate(`/get/movie/by/${id}`)
+    }
+
     return (
         <div className='flex flex-col px-4 sm:px-6'>
 
             {/* admin navbar */}
-            <AdminNavbar/>
+            <AdminNavbar />
 
             <div className="flex justify-center items-center flex-col mt-20 sm:mt-32 lg:mt-40">
 
@@ -32,6 +58,21 @@ export default function AdminDashboard() {
                     <button className='h-8.5 bg-black rounded-2xl px-3 absolute right-1.5 cursor-pointer'>
                         <img src="https://img.icons8.com/?size=100&id=59878&format=png&color=ffffff" className="w-5 h-5 " alt="search icon" />
                     </button>
+                </div>
+            </div>
+            <div className='mt-15 flex justify-center items-center'>
+                <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+                    {
+                        movie.map((mov, index) => (
+                            <div key={index} className='border cursor-pointer hover:shadow-xl transition-all mb-5 border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={() => gotoMovie(mov._id)}>
+                                {/* Dots menu */}
+                                <img src={mov.bannerURL} className='w-full h-40 object-cover rounded-sm' />
+                                <h2 className='font-medium text-xl mt-2 mb-3'>{mov.name}</h2>
+                                <p className='mt-1 mb-2'>Director: {mov.director}</p>
+                                <p className='text-sm text-gray-600 mt-1 text-justify'>{mov.description.substring(0, 180)}.....</p>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>
