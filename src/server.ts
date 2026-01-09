@@ -3,7 +3,7 @@ import cors from 'cors';
 import { connectDB } from "./config/dbConfig";
 import { movie_router } from "./routes/movie.route";
 import { genre_router } from "./routes/genre.route";
-// import connectDB from "./config/dbConfig";
+import { comment_router } from "./routes/comment.route";
 
 const server = express();
 
@@ -14,6 +14,7 @@ server.use(express.urlencoded({ extended: true }));
 // api routes
 server.use('/api/movies', movie_router);
 server.use('/api/genres', genre_router);
+server.use('/api/comments', comment_router);
 
 const PORT = 5000;
 
