@@ -4,6 +4,7 @@ import { connectDB } from "./config/dbConfig";
 import { movie_router } from "./routes/movie.route";
 import { genre_router } from "./routes/genre.route";
 import { comment_router } from "./routes/comment.route";
+import { user_router } from "./routes/user.route";
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use('/api/movies', movie_router);
 server.use('/api/genres', genre_router);
 server.use('/api/comments', comment_router);
+server.use('/api/users', user_router);
 
 const PORT = 5000;
 
