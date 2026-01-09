@@ -11,12 +11,10 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
   const token = localStorage.getItem('token');
   const userString = localStorage.getItem('user');
 
-  // Check if user is authenticated
   if (!token || !userString) {
     return <Navigate to="/" replace />;
   }
 
-  // Check role if specified
   if (requiredRole) {
     try {
       const user = JSON.parse(userString);
