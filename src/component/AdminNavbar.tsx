@@ -33,7 +33,7 @@ export default function AdminNavbar() {
 
                 {/* Hamburger (mobile only) */}
                 <button
-                    className="sm:hidden text-2xl"
+                    className="sm:hidden text-2xl cursor-pointer"
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     ☰
