@@ -34,9 +34,11 @@ export default function UserMovieByID() {
                 alert('Please write a comment');
                 return;
             }
+            const userString = localStorage.getItem('user');
+            const user = userString ? JSON.parse(userString) : null;
             await axios.post('http://localhost:5000/api/comments/add/new/comment', {
                 content: commentInput,
-                name: 'User', // In real application, replace with actual user name
+                name: user?.name || 'Anonymous',
                 movieID: id
             });
             setCommentInput('');

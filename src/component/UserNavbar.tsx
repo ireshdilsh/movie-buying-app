@@ -39,7 +39,7 @@ export default function UserNavbar() {
 
                 {/* Desktop Menu */}
                 <div className=" sm:flex justify-center items-center gap-4 md:gap-6">
-                    <div onClick={() => { setprofile(true) }} className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
+                    <div onClick={() => { setprofile(true) }} className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-1.5'>
                         <p className="text-white font-semibold text-sm">{userData.name.substring(0,2)}</p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ export default function UserNavbar() {
 
                     {/* User Info */}
                     <div className="flex items-center gap-4 w-full border-b border-neutral-200 pb-4">
-                        <div className="flex justify-center items-center rounded-full bg-amber-600 px-3 py-2">
+                        <div className="flex justify-center items-center rounded-full bg-amber-600 px-3 py-1.5">
                             <p className="text-white font-semibold text-sm">{userData.name.substring(0,2)}</p>
                         </div>
                         <div>
@@ -89,29 +89,19 @@ export default function UserNavbar() {
                     {/* Menu Links */}
                     <div className="flex flex-col gap-3 mt-4 text-sm sm:text-base">
 
+                        <button onClick={gotoUserDashboard} className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
+                            <img src="https://img.icons8.com/?size=100&id=yBugi9w42EET&format=png&color=000000" className="h-4" />
+                            Dashboard
+                        </button>
+
                         <button onClick={gotoFavourites} className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
                             <img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" className="h-4" />
                             Favourites
                         </button>
 
-                        {/* NEW: Bookings */}
-                        <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
-                            <img
-                                src="https://img.icons8.com/?size=100&id=114034&format=png&color=000000"
-                                className="h-4"
-                                alt="bookings-icon"
-                            />
-                            Bookings
-                        </button>
-
                         <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
                             <img src="https://img.icons8.com/?size=100&id=59842&format=png&color=000000" className="h-4" />
                             My Films
-                        </button>
-
-                        <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
-                            <img src="https://img.icons8.com/?size=100&id=59996&format=png&color=000000" className="h-4" />
-                            Settings
                         </button>
 
                         <button onClick={handleLogout} className="flex items-center gap-3 hover:bg-red-50 text-red-600 px-2 py-2 rounded cursor-pointer">
