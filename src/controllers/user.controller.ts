@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { User } from '../models/user.model';
 
 const generateToken = (id: string, name: string, email: string, role: string): string => {
@@ -9,12 +9,11 @@ const generateToken = (id: string, name: string, email: string, role: string): s
   return jwt.sign(
     { id, name, email, role },
     jwtSecret,
-    { expiresIn }
+    { expiresIn } as SignOptions
   );
 };
 
-// User Registration
-export const registerUser = async (req: Request, res: Response): Promise<void> => {
+export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -69,8 +68,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
   }
 };
 
-// User Login
-export const loginUser = async (req: Request, res: Response): Promise<void> => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
@@ -127,10 +125,8 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// Get Current User (optional - for protected routes)
-export const getCurrentUser = async (req: Request, res: Response): Promise<void> => {
+export const getMe = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Assuming you have middleware that attaches user to req
     const userId = (req as any).user?.id;
 
     if (!userId) {
