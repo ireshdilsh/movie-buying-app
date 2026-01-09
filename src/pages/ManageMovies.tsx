@@ -78,7 +78,7 @@ export default function ManageMovies() {
         <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {
             movie.map((mov, index) => (
-              <div key={index} className='border cursor-pointer hover:shadow-xl transition-all mb-5 border-neutral-200 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={() => gotoMovie(mov._id)}>
+              <div key={index} className='cursor-pointer hover:shadow-xl transition-all mb-5 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={() => gotoMovie(mov._id)}>
                 {/* Dots menu */}
                 <button
                   onClick={(e) => toggleMenu(mov._id, e)}
@@ -109,7 +109,7 @@ export default function ManageMovies() {
                   </div>
                 )}
 
-                <img src={mov.bannerURL} className='w-full h-40 object-cover rounded-sm' />
+                <img src={mov.bannerURL} className='w-full h-40 object-cover' />
                 <h2 className='font-medium text-xl mt-2 mb-3'>{mov.name}</h2>
                 <p className='mt-1 mb-2'>Director: {mov.director}</p>
                 <p className='text-sm text-gray-600 mt-1 text-justify'>{mov.description.substring(0, 180)}.....</p>
