@@ -1,6 +1,8 @@
 import { useState } from "react";
 import dark_logo from "../assets/dark_logo.png";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -12,9 +14,81 @@ const navigation = [
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const [login, setlogin] = useState(false);
   const [register, setregister] = useState(false);
+
+  // Login state
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
+  // Register state
+  const [registerName, setRegisterName] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+
+  // Handle Login
+  const handleLogin = async () => {
+    try {
+      if (!loginEmail || !loginPassword) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const response = await axios.post('http://localhost:5000/api/users/login', {
+        email: loginEmail,
+        password: loginPassword
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        
+        // Navigate based on user role
+        if (response.data.user.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/user/dashboard');
+        }
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      alert(error.response?.data?.message || 'Login failed');
+      console.error('Login error:', error);
+    }
+  };
+
+  // Handle Register
+  const handleRegister = async () => {
+    try {
+      if (!registerName || !registerEmail || !registerPassword) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const response = await axios.post('http://localhost:5000/api/users/register', {
+        name: registerName,
+        email: registerEmail,
+        password: registerPassword,
+        role: 'user'
+      });
+
+      if (response.data.success) {
+        alert('Registration successful! Please login.');
+        setregister(false);
+        setlogin(true);
+        // Clear register form
+        setRegisterName('');
+        setRegisterEmail('');
+        setRegisterPassword('');
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      alert(error.response?.data?.message || 'Registration failed');
+      console.error('Registration error:', error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -231,6 +305,8 @@ export default function LandingPage() {
                 <label className="text-sm sm:text-sm font-medium mb-1">Email Address</label>
                 <input
                   type="email"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
                   className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
                 />
               </div>
@@ -238,6 +314,8 @@ export default function LandingPage() {
                 <label className="text-sm sm:text-sm font-medium mb-1">Password</label>
                 <input
                   type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
                   className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
                 />
               </div>
@@ -250,7 +328,9 @@ export default function LandingPage() {
                   <a href="#" className="text-sm sm:text-sm text-amber-500 hover:underline">Forgot Password?</a>
                 </div>
               </div>
-              <button className="bg-amber-500 hover:opacity-85 px-6 py-2 sm:py-2 rounded-lg font-medium mt-2 sm:mt-2 w-full cursor-pointer text-sm sm:text-base">
+              <button 
+                onClick={handleLogin}
+                className="bg-amber-500 hover:opacity-85 px-6 py-2 sm:py-2 rounded-lg font-medium mt-2 sm:mt-2 w-full cursor-pointer text-sm sm:text-base">
                 Authorization
               </button>
             </div>
@@ -306,6 +386,8 @@ export default function LandingPage() {
                 <label className="text-sm sm:text-sm font-medium mb-1">Full Name</label>
                 <input
                   type="text"
+                  value={registerName}
+                  onChange={(e) => setRegisterName(e.target.value)}
                   className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
                 />
               </div>
@@ -313,6 +395,8 @@ export default function LandingPage() {
                 <label className="text-sm sm:text-sm font-medium mb-1">Email Address</label>
                 <input
                   type="email"
+                  value={registerEmail}
+                  onChange={(e) => setRegisterEmail(e.target.value)}
                   className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
                 />
               </div>
@@ -320,10 +404,14 @@ export default function LandingPage() {
                 <label className="text-sm sm:text-sm font-medium mb-1">Password</label>
                 <input
                   type="password"
+                  value={registerPassword}
+                  onChange={(e) => setRegisterPassword(e.target.value)}
                   className="border border-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
                 />
               </div>
-              <button className="bg-amber-500 hover:opacity-85 px-6 py-2 sm:py-2 rounded-lg font-medium mt-2 sm:mt-2 w-full cursor-pointer text-sm sm:text-base">
+              <button 
+                onClick={handleRegister}
+                className="bg-amber-500 hover:opacity-85 px-6 py-2 sm:py-2 rounded-lg font-medium mt-2 sm:mt-2 w-full cursor-pointer text-sm sm:text-base">
                 Authorization
               </button>
             </div>

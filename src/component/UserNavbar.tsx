@@ -1,14 +1,30 @@
-import React, { useState } from 'react'
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useState, useEffect } from 'react'
 import dark_logo from '../assets/dark_logo.png'
 import { useNavigate, type NavigateFunction } from 'react-router-dom';
 
 export default function UserNavbar() {
 
     const [profile, setprofile] = useState(false);
+    const [userData, setUserData] = useState({ name: '', email: '' });
     const navigate : NavigateFunction = useNavigate()
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            const parsedUser = JSON.parse(user);
+            setUserData({ name: parsedUser.name, email: parsedUser.email });
+        }
+    }, []);
 
     const gotoUserDashboard = () => {
         navigate('/user/dashboard')
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/');
     }
 
     return (
@@ -57,10 +73,10 @@ export default function UserNavbar() {
                         </div>
                         <div>
                             <p className="text-gray-700 font-semibold text-sm sm:text-base">
-                                Iresh Dilshan
+                                {userData.name || 'User'}
                             </p>
                             <p className="text-xs sm:text-sm text-gray-900">
-                                ireshsilva1234@gmail.com
+                                {userData.email || 'user@example.com'}
                             </p>
                         </div>
                     </div>
@@ -93,7 +109,7 @@ export default function UserNavbar() {
                             Settings
                         </button>
 
-                        <button className="flex items-center gap-3 hover:bg-red-50 text-red-600 px-2 py-2 rounded cursor-pointer">
+                        <button onClick={handleLogout} className="flex items-center gap-3 hover:bg-red-50 text-red-600 px-2 py-2 rounded cursor-pointer">
                             <img src="https://img.icons8.com/?size=100&id=24337&format=png&color=000000" className="h-4" />
                             Logout
                         </button>
