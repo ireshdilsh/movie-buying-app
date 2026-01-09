@@ -9,17 +9,20 @@ export default function GetMovieById() {
     const { id } = useParams<{ id: string }>()
     const [movie, setmovie] = useState<Movie | null>(null);
 
+
     useEffect(() => {
-        const fetchMovieById = async () => {
-            try {
-                const response = await axios.get<{ movie: Movie }>(`http://localhost:5000/api/movies/get/movie/${id}`);
-                setmovie(response.data.movie)
-            } catch (error) {
-                console.error("Error fetching movie:", error);
-            }
-        }
+        // eslint-disable-next-line react-hooks/immutability
         fetchMovieById();
     }, []);
+
+    const fetchMovieById = async () => {
+        try {
+            const response = await axios.get<{ movie: Movie }>(`http://localhost:5000/api/movies/get/movie/${id}`);
+            setmovie(response.data.movie)
+        } catch (error) {
+            console.error("Error fetching movie:", error);
+        }
+    }
 
     return (
         <div className='flex flex-col px-4 sm:px-6'>
@@ -66,8 +69,8 @@ export default function GetMovieById() {
                             Rs.{movie?.price}.00
                         </h2>
                     </div>
-
                 </div>
+
             </div>
         </div>
     )
