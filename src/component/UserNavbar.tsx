@@ -14,7 +14,7 @@ export default function UserNavbar() {
     return (
         <div>
             <nav className="flex justify-between items-center w-full mt-5 px-5 sm:px-8 md:px-12 lg:px-20 border-b border-b-neutral-100 pb-3">
-                <img onClick={gotoUserDashboard} src={dark_logo} className="h-6 sm:h-7" alt="Dark-Logo" />
+                <img onClick={gotoUserDashboard} src={dark_logo} className="h-6 cursor-pointer sm:h-7" alt="Dark-Logo" />
 
                 {/* Desktop Menu */}
                 <div className=" sm:flex justify-center items-center gap-4 md:gap-6">
