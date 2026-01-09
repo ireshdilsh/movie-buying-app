@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import UserNavbar from '../component/UserNavbar';
 import type { Movie } from '../interfaces/movie';
-// import { useNavigate, type NavigateFunction } from 'react-router-dom';
+import { useNavigate, type NavigateFunction } from 'react-router-dom';
 import axios from 'axios';
 
 export default function UserDashboard() {
 
     const [movie, setmovie] = useState<Movie[]>([]);
-    // const navigate: NavigateFunction = useNavigate()
+    const navigate: NavigateFunction = useNavigate()
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/immutability
@@ -24,9 +24,9 @@ export default function UserDashboard() {
         }
     }
 
-    // const gotoMovie = (id: string) => {
-    //     navigate(`/get/movie/by/${id}`)
-    // }
+    const gotoMovieById = (id: string) => {
+        navigate(`/user/get/movie/by/${id}`)
+    }
     return (
         <div className="flex flex-col px-4 sm:px-6">
 
@@ -64,7 +64,7 @@ export default function UserDashboard() {
                 <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                     {
                         movie.map((mov, index) => (
-                            <div key={index} className='cursor-pointer hover:shadow-xl transition-all mb-5 rounded-sm p-3 flex flex-col justify-start items-start relative'>
+                            <div key={index} className='cursor-pointer hover:shadow-xl transition-all mb-5 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={()=>gotoMovieById(mov._id)}>
                                 {/* Dots menu */}
                                 <img src={mov.bannerURL} className='w-full h-40 object-cover ' />
                                 <h2 className='font-medium text-xl mt-2 mb-3'>{mov.name}</h2>
