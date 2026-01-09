@@ -7,12 +7,19 @@ import axios from 'axios';
 export default function UserDashboard() {
 
     const [movie, setmovie] = useState<Movie[]>([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate: NavigateFunction = useNavigate()
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/immutability
         getAllMovies()
     }, []);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            getAllMovies()
+        }
+    }, [searchQuery]);
 
     const getAllMovies = async () => {
         try {
@@ -21,6 +28,26 @@ export default function UserDashboard() {
             setmovie(resp.data.movies);
         } catch (error) {
             console.log("Error fetching movies:", error);
+        }
+    }
+
+    const handleSearch = async () => {
+        try {
+            if (!searchQuery.trim()) {
+                getAllMovies();
+                return;
+            }
+
+            const resp = await axios.get(`http://localhost:5000/api/movies/search?name=${searchQuery}`);
+            console.log("Search results:", resp.data.movies);
+            setmovie(resp.data.movies);
+        } catch (error) {
+            console.log("Error searching movies:", error);
+        }
+    }
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            handleSearch();
         }
     }
 
@@ -50,10 +77,15 @@ export default function UserDashboard() {
                 <div className='flex mt-6 justify-center items-center sm:mt-6 lg:mt-8 relative'>
                     <input
                         type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={handleKeyPress}
                         className="px-5 w-full sm:w-[320px] md:w-[420px] pr-18 lg:w-[600px] h-10 sm:h-11 border bg-neutral-100 rounded-3xl border-none text-sm sm:text-base"
                         placeholder="Find Trending Movie..."
                     />
-                    <button className='h-8.5 bg-black rounded-2xl px-3 absolute right-1.5 cursor-pointer'>
+                    <button
+                        onClick={handleSearch}
+                        className='h-8.5 bg-black rounded-2xl px-3 absolute right-1.5 cursor-pointer hover:opacity-80'>
                         <img src="https://img.icons8.com/?size=100&id=59878&format=png&color=ffffff" className="w-5 h-5 " alt="search icon" />
                     </button>
                 </div>
@@ -64,7 +96,7 @@ export default function UserDashboard() {
                 <div className='w-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                     {
                         movie.map((mov, index) => (
-                            <div key={index} className='cursor-pointer hover:shadow-xl transition-all mb-5 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={()=>gotoMovieById(mov._id)}>
+                            <div key={index} className='cursor-pointer hover:shadow-xl transition-all mb-5 rounded-sm p-3 flex flex-col justify-start items-start relative' onClick={() => gotoMovieById(mov._id)}>
                                 {/* Dots menu */}
                                 <img src={mov.bannerURL} className='w-full h-40 object-cover ' />
                                 <h2 className='font-medium text-xl mt-2 mb-3'>{mov.name}</h2>

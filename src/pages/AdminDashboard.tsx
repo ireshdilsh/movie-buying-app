@@ -7,6 +7,7 @@ import { useNavigate, type NavigateFunction } from 'react-router-dom';
 export default function AdminDashboard() {
 
     const [movie, setmovie] = useState<Movie[]>([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate : NavigateFunction = useNavigate()
 
     useEffect(() => {
@@ -21,6 +22,27 @@ export default function AdminDashboard() {
             setmovie(resp.data.movies);
         } catch (error) {
             console.log("Error fetching movies:", error);
+        }
+    }
+
+    const handleSearch = async () => {
+        try {
+            if (!searchQuery.trim()) {
+                getAllMovies();
+                return;
+            }
+
+            const resp = await axios.get(`http://localhost:5000/api/movies/search?query=${searchQuery}`);
+            console.log("Search results:", resp.data.movies);
+            setmovie(resp.data.movies);
+        } catch (error) {
+            console.log("Error searching movies:", error);
+        }
+    }
+
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            handleSearch();
         }
     }
 
@@ -52,10 +74,15 @@ export default function AdminDashboard() {
                 <div className='flex mt-6 justify-center items-center sm:mt-6 lg:mt-8 relative'>
                     <input
                         type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={handleKeyPress}
                         className="px-5 w-full sm:w-[320px] md:w-[420px] pr-18 lg:w-[600px] h-10 sm:h-11 border bg-neutral-100 rounded-3xl border-none text-sm sm:text-base"
                         placeholder="Find Trending Movie..."
                     />
-                    <button className='h-8.5 bg-black rounded-2xl px-3 absolute right-1.5 cursor-pointer'>
+                    <button 
+                        onClick={handleSearch}
+                        className='h-8.5 bg-black rounded-2xl px-3 absolute right-1.5 cursor-pointer hover:opacity-80'>
                         <img src="https://img.icons8.com/?size=100&id=59878&format=png&color=ffffff" className="w-5 h-5 " alt="search icon" />
                     </button>
                 </div>
