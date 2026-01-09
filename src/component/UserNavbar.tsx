@@ -35,7 +35,7 @@ export default function UserNavbar() {
                 {/* Desktop Menu */}
                 <div className=" sm:flex justify-center items-center gap-4 md:gap-6">
                     <div onClick={() => { setprofile(true) }} className='cursor-pointer flex justify-center items-center rounded-4xl bg-amber-600 px-3 py-2'>
-                        <p className="text-white font-semibold text-sm">ID</p>
+                        <p className="text-white font-semibold text-sm">{userData.name.substring(0,2)}</p>
                     </div>
                 </div>
             </nav>
@@ -69,7 +69,7 @@ export default function UserNavbar() {
                     {/* User Info */}
                     <div className="flex items-center gap-4 w-full border-b border-neutral-200 pb-4">
                         <div className="flex justify-center items-center rounded-full bg-amber-600 px-3 py-2">
-                            <p className="text-white font-semibold text-sm">ID</p>
+                            <p className="text-white font-semibold text-sm">{userData.name.substring(0,2)}</p>
                         </div>
                         <div>
                             <p className="text-gray-700 font-semibold text-sm sm:text-base">
