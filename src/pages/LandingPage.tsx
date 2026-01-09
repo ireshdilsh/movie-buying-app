@@ -3,6 +3,7 @@ import dark_logo from "../assets/dark_logo.png";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from '@react-oauth/google';
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -89,6 +90,37 @@ export default function LandingPage() {
       console.error('Registration error:', error);
     }
   };
+
+  // Handle Google Login
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        // Get user info from Google
+        const userInfo = await axios.get(
+          'https://www.googleapis.com/oauth2/v3/userinfo',
+          { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+        );
+
+        const { name, email } = userInfo.data;
+
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify({ name, email, role: 'user' }));
+        localStorage.setItem('token', tokenResponse.access_token);
+
+        // Close modals and navigate
+        setlogin(false);
+        setregister(false);
+        navigate('/user/dashboard');
+      } catch (error) {
+        console.error('Google login error:', error);
+        alert('Google authentication failed');
+      }
+    },
+    onError: () => {
+      console.error('Google Login Failed');
+      alert('Google authentication failed');
+    }
+  });
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -339,7 +371,9 @@ export default function LandingPage() {
             <div className="w-95 bg-neutral-200 h-[1px] mt-4 sm:mt-5"></div>
 
             {/* Continue With Google */}
-            <button className="mt-3 sm:mt-4 px-6 py-2 sm:py-2 border border-gray-300 rounded-lg font-medium cursor-pointer w-95 flex justify-center items-center gap-3 sm:gap-7 text-sm sm:text-base">
+            <button 
+              onClick={() => googleLogin()}
+              className="mt-3 sm:mt-4 px-6 py-2 sm:py-2 border border-gray-300 rounded-lg font-medium cursor-pointer w-95 flex justify-center items-center gap-3 sm:gap-7 text-sm sm:text-base">
               Continue With Google
               <img
                 src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
@@ -420,7 +454,9 @@ export default function LandingPage() {
             <div className="w-95 bg-neutral-200 h-[1px] mt-4 sm:mt-5"></div>
 
             {/* Continue With Google */}
-            <button className="mt-3 sm:mt-4 px-6 py-2 sm:py-2 border border-gray-300 rounded-lg font-medium cursor-pointer w-95 flex justify-center items-center gap-3 sm:gap-7 text-sm sm:text-base">
+            <button 
+              onClick={() => googleLogin()}
+              className="mt-3 sm:mt-4 px-6 py-2 sm:py-2 border border-gray-300 rounded-lg font-medium cursor-pointer w-95 flex justify-center items-center gap-3 sm:gap-7 text-sm sm:text-base">
               Continue With Google
               <img
                 src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
