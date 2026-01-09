@@ -7,6 +7,7 @@ import AddMovies from './pages/AddMovies'
 import ManageMovies from './pages/ManageMovies'
 import GetMovieById from './pages/GetMovieById'
 import UserMovieByID from './pages/UserMovieByID'
+import FavouriteMovies from './pages/FavouriteMovies'
 import ProtectedRoute from './component/ProtectedRoute'
 
 export default function NavigateRoutes() {
@@ -30,6 +31,14 @@ export default function NavigateRoutes() {
             element={
               <ProtectedRoute requiredRole="user">
                 <UserMovieByID />
+              </ProtectedRoute>
+            }
+          />
+          <Route 
+            path='/user/favourites' 
+            element={
+              <ProtectedRoute requiredRole="user">
+                <FavouriteMovies />
               </ProtectedRoute>
             }
           />

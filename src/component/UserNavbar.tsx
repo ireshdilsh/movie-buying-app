@@ -27,6 +27,11 @@ export default function UserNavbar() {
         navigate('/');
     }
 
+    const gotoFavourites = () => {
+        navigate('/user/favourites');
+        setprofile(false);
+    }
+
     return (
         <div>
             <nav className="flex justify-between items-center w-full mt-5 px-5 sm:px-8 md:px-12 lg:px-20 border-b border-b-neutral-100 pb-3">
@@ -84,7 +89,7 @@ export default function UserNavbar() {
                     {/* Menu Links */}
                     <div className="flex flex-col gap-3 mt-4 text-sm sm:text-base">
 
-                        <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
+                        <button onClick={gotoFavourites} className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
                             <img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" className="h-4" />
                             Favourites
                         </button>

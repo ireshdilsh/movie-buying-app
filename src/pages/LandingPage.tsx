@@ -10,7 +10,6 @@ const navigation = [
   { name: "Movies", href: "#movies" },
   { name: "Services", href: "#services" },
   { name: "About", href: "#about" },
-  { name: "Sign In", href: "#signin" },
 ];
 
 export default function LandingPage() {

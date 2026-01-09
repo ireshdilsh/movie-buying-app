@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
 import UserNavbar from '../component/UserNavbar'
 import { useParams } from 'react-router-dom'
@@ -11,6 +12,7 @@ export default function UserMovieByID() {
     const [movie, setmovie] = useState<Movie | null>(null);
     const [comments, setcomments] = useState<Comment[]>([]);
     const [commentInput, setCommentInput] = useState('');
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const fetchMovieById = async () => {
@@ -51,6 +53,45 @@ export default function UserMovieByID() {
             console.log('Comments Data', resp.data)
         } catch (error) {
             console.log('Something Went Wrong', error)
+        }
+    }
+
+    const addToFavorites = async () => {
+        try {
+            const userString = localStorage.getItem('user');
+            if (!userString) {
+                alert('Please login to add favorites');
+                return;
+            }
+
+            const user = JSON.parse(userString);
+            // Try multiple possible endpoints
+            let response;
+            try {
+                response = await axios.post('http://localhost:5000/api/users/favorites/add', {
+                    email: user.email,
+                    movieId: id
+                });
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (err) {
+                // If first endpoint fails, try alternative
+                response = await axios.post('http://localhost:5000/api/users/favorites/add', {
+                    email: user.email,
+                    movieId: id
+                });
+            }
+
+            if (response.data.success) {
+                setIsFavorite(true);
+                alert('Movie added to favorites!');
+            }
+        } catch (error: any) {
+            if (error.response?.data?.message) {
+                alert(error.response.data.message);
+            } else {
+                alert('Failed to add to favorites');
+            }
+            console.error("Error adding to favorites:", error);
         }
     }
 
@@ -95,6 +136,18 @@ export default function UserMovieByID() {
                             <span>Price:</span>
                             <span className='font-medium text-black'>Rs.{movie?.price}/=</span>
                         </div>
+
+                        <button 
+                            onClick={addToFavorites}
+                            disabled={isFavorite}
+                            className={`border border-neutral-400 mt-4 px-4 py-1.5 rounded-sm cursor-pointer flex font-medium justify-center items-center gap-2.5 hover:opacity-80 ${isFavorite ? 'bg-gray-200 cursor-not-allowed' : ''}`}>
+                            {isFavorite ? 'Added to Favorites' : 'Add to favourite'}
+                            <img
+                                src={isFavorite ? "https://img.icons8.com/?size=100&id=87&format=png&color=000000" : "https://img.icons8.com/?size=100&id=99981&format=png&color=000000"}
+                                className='h-5'
+                                alt=""
+                            />
+                        </button>
 
                         <button className='bg-amber-500 mt-4 px-4 py-1.5 rounded-sm cursor-pointer flex font-medium justify-center items-center gap-2.5 hover:opacity-80'>
                             Buy Now
@@ -141,9 +194,9 @@ export default function UserMovieByID() {
                     {/* load all comments */}
                     <div className='flex flex-col mt-7 gap-5'>
                         {comments &&
-                            comments.map((comment) => (
+                            comments.map((comment, index) => (
                                 <div
-                                    key={comment.id}
+                                    key={comment.id || index}
                                     className='border-b border-b-neutral-200 px-4 py-3 rounded-md'
                                 >
                                     <h2 className='font-medium text-lg'>{comment.name}</h2>
