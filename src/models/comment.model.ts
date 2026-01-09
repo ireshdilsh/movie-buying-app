@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-    content: {
+      name: {
         type: String,
         required: true
     },
-    name: {
+    content: {
         type: String,
         required: true
     },
