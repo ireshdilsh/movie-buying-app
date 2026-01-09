@@ -45,6 +45,7 @@ export default function UserDashboard() {
             console.log("Error searching movies:", error);
         }
     }
+    
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             handleSearch();
