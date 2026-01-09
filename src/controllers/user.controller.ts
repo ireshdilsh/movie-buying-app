@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { User } from '../models/user.model';
+import { Favorite } from '../models/favorite.model';
+import { Purchase } from '../models/purchase.model';
+import { Movie } from '../models/movie.model';
 
 const generateToken = (id: string, name: string, email: string, role: string): string => {
   const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret';
@@ -160,6 +163,231 @@ export const getMe = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({
       success: false,
       message: 'Error fetching user',
+      error: error.message,
+    });
+  }
+};
+
+export const addToFavorites = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, movieId } = req.body;
+
+    if (!email || !movieId) {
+      res.status(400).json({
+        success: false,
+        message: 'Email and movieId are required',
+      });
+      return;
+    }
+
+    // Normalize email to lowercase for consistent lookup
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Check if already in favorites
+    const existingFavorite = await Favorite.findOne({ 
+      email: normalizedEmail, 
+      movieId 
+    });
+
+    if (existingFavorite) {
+      res.status(400).json({
+        success: false,
+        message: 'Movie already in favorites',
+      });
+      return;
+    }
+
+    // Create new favorite
+    const favorite = await Favorite.create({
+      email: normalizedEmail,
+      movieId,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Movie added to favorites',
+      favorite,
+    });
+  } catch (error: any) {
+    console.error('Add to favorites error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error adding to favorites',
+      error: error.message,
+    });
+  }
+};
+
+export const removeFromFavorites = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, movieId } = req.body;
+
+    if (!email || !movieId) {
+      res.status(400).json({
+        success: false,
+        message: 'Email and movieId are required',
+      });
+      return;
+    }
+
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase().trim();
+
+    const deletedFavorite = await Favorite.findOneAndDelete({
+      email: normalizedEmail,
+      movieId,
+    });
+
+    if (!deletedFavorite) {
+      res.status(404).json({
+        success: false,
+        message: 'Favorite not found',
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Movie removed from favorites',
+    });
+  } catch (error: any) {
+    console.error('Remove from favorites error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error removing from favorites',
+      error: error.message,
+    });
+  }
+};
+
+export const getFavoriteMovies = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      res.status(400).json({
+        success: false,
+        message: 'Email is required',
+      });
+      return;
+    }
+
+    // Normalize email to lowercase
+    const normalizedEmail = (email as string).toLowerCase().trim();
+
+    const favorites = await Favorite.find({ email: normalizedEmail })
+      .populate('movieId')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      favorites: favorites.map(fav => fav.movieId),
+      count: favorites.length,
+    });
+  } catch (error: any) {
+    console.error('Get favorite movies error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching favorite movies',
+      error: error.message,
+    });
+  }
+};
+
+export const buyMovie = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, movieId } = req.body;
+
+    if (!email || !movieId) {
+      res.status(400).json({
+        success: false,
+        message: 'Email and movieId are required',
+      });
+      return;
+    }
+
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Check if already purchased
+    const existingPurchase = await Purchase.findOne({
+      email: normalizedEmail,
+      movieId,
+    });
+
+    if (existingPurchase) {
+      res.status(400).json({
+        success: false,
+        message: 'Movie already purchased',
+      });
+      return;
+    }
+
+    // Get movie details to store price
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
+      res.status(404).json({
+        success: false,
+        message: 'Movie not found',
+      });
+      return;
+    }
+
+    // Create new purchase
+    const purchase = await Purchase.create({
+      email: normalizedEmail,
+      movieId,
+      price: movie.price,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Movie purchased successfully',
+      purchase,
+    });
+  } catch (error: any) {
+    console.error('Buy movie error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error purchasing movie',
+      error: error.message,
+    });
+  }
+};
+
+export const getPurchasedMovies = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      res.status(400).json({
+        success: false,
+        message: 'Email is required',
+      });
+      return;
+    }
+
+    // Normalize email to lowercase
+    const normalizedEmail = (email as string).toLowerCase().trim();
+
+    const purchases = await Purchase.find({ email: normalizedEmail })
+      .populate('movieId')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      purchases: purchases.map(purchase => ({
+        movie: purchase.movieId,
+        price: purchase.price,
+        purchaseDate: purchase.purchaseDate,
+      })),
+      count: purchases.length,
+    });
+  } catch (error: any) {
+    console.error('Get purchased movies error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching purchased movies',
       error: error.message,
     });
   }
