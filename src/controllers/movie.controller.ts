@@ -59,6 +59,27 @@ export const getMovies = async (req: any, res: any) => {
     }
 }
 
+export const searchMovies = async (req: any, res: any) => {
+    try {
+        const { name } = req.query;
+        
+        if (!name) {
+            return res.status(400).json({ message: 'Movie name is required' });
+        }
+
+        const movies = await Movie.find({
+            name: { $regex: name, $options: 'i' }
+        });
+
+        return res.status(200).json({ 
+            movies,
+            count: movies.length 
+        });
+    } catch (error) {
+        return res.status(500).json({ message: 'Error searching movies', error });
+    }
+}
+
 export const getMovieById = async (req: any, res: any) => {
     try {
         const { id } = req.params;
