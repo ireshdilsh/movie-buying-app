@@ -18,6 +18,12 @@ export default function AdminNavbar() {
         navigate('/manage/movies')
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/');
+    }
+
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -68,7 +74,7 @@ export default function AdminNavbar() {
                         Buying Movies
                     </button>
 
-                    <button className='cursor-pointer text-sm font-medium bg-amber-500 px-4 py-2 rounded-sm hover:opacity-80'>
+                    <button onClick={handleLogout} className='cursor-pointer text-sm font-medium bg-amber-500 px-4 py-2 rounded-sm hover:opacity-80'>
                         Sign out
                     </button>
                 </div>
