@@ -32,6 +32,11 @@ export default function UserNavbar() {
         setprofile(false);
     }
 
+    const gotoMyMovies = () => {
+        navigate('/user/my-movies');
+        setprofile(false);
+    }
+
     return (
         <div>
             <nav className="flex justify-between items-center w-full mt-5 px-5 sm:px-8 md:px-12 lg:px-20 border-b border-b-neutral-100 pb-3">
@@ -99,7 +104,7 @@ export default function UserNavbar() {
                             Favourites
                         </button>
 
-                        <button className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
+                        <button onClick={gotoMyMovies} className="flex items-center gap-3 hover:bg-neutral-100 px-2 py-2 rounded cursor-pointer">
                             <img src="https://img.icons8.com/?size=100&id=59842&format=png&color=000000" className="h-4" />
                             My Films
                         </button>

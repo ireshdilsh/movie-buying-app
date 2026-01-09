@@ -13,6 +13,8 @@ export default function UserMovieByID() {
     const [comments, setcomments] = useState<Comment[]>([]);
     const [commentInput, setCommentInput] = useState('');
     const [isFavorite, setIsFavorite] = useState(false);
+    const [showBuyModal, setShowBuyModal] = useState(false);
+    const [isPurchased, setIsPurchased] = useState(false);
 
     useEffect(() => {
         const fetchMovieById = async () => {
@@ -97,6 +99,35 @@ export default function UserMovieByID() {
         }
     }
 
+    const handleBuyMovie = async () => {
+        try {
+            const userString = localStorage.getItem('user');
+            if (!userString) {
+                alert('Please login to purchase movies');
+                return;
+            }
+
+            const user = JSON.parse(userString);
+            const response = await axios.post('http://localhost:5000/api/users/purchase', {
+                email: user.email,
+                movieId: id
+            });
+
+            if (response.data.success) {
+                setIsPurchased(true);
+                setShowBuyModal(false);
+                alert('Movie purchased successfully!');
+            }
+        } catch (error: any) {
+            if (error.response?.data?.message) {
+                alert(error.response.data.message);
+            } else {
+                alert('Failed to purchase movie');
+            }
+            console.error("Error purchasing movie:", error);
+        }
+    }
+
     return (
         <div className='flex flex-col px-4 sm:px-6'>
             <UserNavbar />
@@ -151,8 +182,11 @@ export default function UserMovieByID() {
                             />
                         </button>
 
-                        <button className='bg-amber-500 mt-4 px-4 py-1.5 rounded-sm cursor-pointer flex font-medium justify-center items-center gap-2.5 hover:opacity-80'>
-                            Buy Now
+                        <button 
+                            onClick={() => setShowBuyModal(true)}
+                            disabled={isPurchased}
+                            className={`bg-amber-500 mt-4 px-4 py-1.5 rounded-sm cursor-pointer flex font-medium justify-center items-center gap-2.5 hover:opacity-80 ${isPurchased ? 'bg-gray-400 cursor-not-allowed' : ''}`}>
+                            {isPurchased ? 'Already Purchased' : 'Buy Now'}
                             <img
                                 src="https://img.icons8.com/?size=100&id=84998&format=png&color=000000"
                                 className='h-5'
@@ -211,6 +245,79 @@ export default function UserMovieByID() {
                     </div>
                 </div>
             </div>
+
+            {/* Buy Movie Modal */}
+            {showBuyModal && (
+                <div className="flex justify-center items-center fixed inset-0 bg-black/50 z-50 px-4 sm:px-6">
+                    <div className="bg-white rounded-lg py-8 sm:py-10 px-6 sm:px-10 flex flex-col w-full max-w-md sm:max-w-lg">
+                        
+                        {/* Close Button */}
+                        <div className="w-full flex justify-end cursor-pointer" onClick={() => setShowBuyModal(false)}>
+                            <img
+                                src="https://img.icons8.com/?size=100&id=83149&format=png&color=000000"
+                                alt="close-icon"
+                                className="h-5 sm:h-6"
+                            />
+                        </div>
+
+                        {/* Modal Header */}
+                        <div className="flex justify-center items-center mb-4">
+                            <img 
+                                src="https://img.icons8.com/?size=100&id=84998&format=png&color=F59E0B" 
+                                className="h-16 sm:h-20"
+                                alt="purchase-icon"
+                            />
+                        </div>
+
+                        <h1 className="text-xl sm:text-2xl font-semibold text-center">Purchase Movie</h1>
+                        
+                        <p className="text-sm sm:text-base text-gray-600 text-center mt-2">
+                            You're about to purchase this movie
+                        </p>
+
+                        {/* Movie Details */}
+                        <div className="mt-6 border border-neutral-200 rounded-lg p-4">
+                            <div className="flex gap-4">
+                                <img 
+                                    src={movie?.bannerURL} 
+                                    className="w-24 h-32 object-cover rounded-md"
+                                    alt={movie?.name}
+                                />
+                                <div className="flex-1">
+                                    <h2 className="font-semibold text-lg">{movie?.name}</h2>
+                                    <p className="text-sm text-gray-600 mt-1">Director: {movie?.director}</p>
+                                    <p className="text-sm text-gray-600">Genre: {movie?.genre}</p>
+                                    <div className="mt-3 flex items-center gap-2">
+                                        <span className="text-sm text-gray-600">Price:</span>
+                                        <span className="text-xl font-bold text-amber-500">Rs.{movie?.price}/=</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Purchase Info */}
+                        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                            <p className="text-sm text-amber-800">
+                                <strong>Note:</strong> Once purchased, you'll have lifetime access to this movie.
+                            </p>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-3 mt-6">
+                            <button 
+                                onClick={() => setShowBuyModal(false)}
+                                className="flex-1 px-6 py-2.5 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                Cancel
+                            </button>
+                            <button 
+                                onClick={handleBuyMovie}
+                                className="flex-1 px-6 py-2.5 bg-amber-500 text-white rounded-lg font-medium hover:bg-amber-600 transition-colors">
+                                Confirm Purchase
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
 
     )
