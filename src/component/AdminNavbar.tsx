@@ -18,6 +18,10 @@ export default function AdminNavbar() {
         navigate('/manage/movies')
     }
 
+    const navigateBuyingMoviesPage = () => {
+        navigate('/admin/buying-movies')
+    }
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -70,7 +74,7 @@ export default function AdminNavbar() {
                         Manage Movies
                     </button>
 
-                    <button className='cursor-pointer text-sm'>
+                    <button onClick={navigateBuyingMoviesPage} className='cursor-pointer text-sm'>
                         Buying Movies
                     </button>
 

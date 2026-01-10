@@ -178,14 +178,25 @@ export default function LandingPage() {
       {/* HERO SECTION */}
       <section
         className="
+          relative
           flex flex-col
           items-start
           px-8 sm:px-12 lg:px-20
-          mt-16 sm:mt-20 lg:mt-24
+          pt-16 sm:pt-20 lg:pt-24
           mx-auto
+          min-h-[500px]
         "
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
       >
-        <div>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80"></div>
+        
+        <div className="relative z-10">
           <p className="text-sm text-gray-500 border mb-2 border-neutral-200 px-3 py-1 rounded-2xl w-84.5">Experience Cinema Like Never Before on MAG.</p>
           <h1
             className="
@@ -276,6 +287,81 @@ export default function LandingPage() {
         </p>
 
         {/* movie cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 sm:mt-12 max-w-6xl mx-auto w-full">
+          
+          {/* Movie Card 1 */}
+          <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+            <div className="relative w-full h-48 bg-neutral-200">
+              <img 
+                src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500&auto=format&fit=crop" 
+                alt="Movie 1" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">Midnight Cinema</h3>
+              <p className="text-gray-600 text-sm mb-3">Action • Thriller • 2h 15m</p>
+              <button className="w-full bg-amber-500 hover:opacity-85 px-4 py-2 rounded-lg font-medium text-sm cursor-pointer">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+          {/* Movie Card 2 */}
+          <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+            <div className="relative w-full h-48 bg-neutral-200">
+              <img 
+                src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" 
+                alt="Movie 2" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">Dreams of Tomorrow</h3>
+              <p className="text-gray-600 text-sm mb-3">Drama • Romance • 2h 10m</p>
+              <button className="w-full bg-amber-500 hover:opacity-85 px-4 py-2 rounded-lg font-medium text-sm cursor-pointer">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+          {/* Movie Card 3 */}
+          <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+            <div className="relative w-full h-48 bg-neutral-200">
+              <img 
+                src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=500&auto=format&fit=crop" 
+                alt="Movie 3" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">Cosmic Quest</h3>
+              <p className="text-gray-600 text-sm mb-3">Sci-Fi • Adventure • 2h 25m</p>
+              <button className="w-full bg-amber-500 hover:opacity-85 px-4 py-2 rounded-lg font-medium text-sm cursor-pointer">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+          {/* Movie Card 4 */}
+          <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+            <div className="relative w-full h-48 bg-neutral-200">
+              <img 
+                src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" 
+                alt="Movie 4" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">Echoes of Love</h3>
+              <p className="text-gray-600 text-sm mb-3">Comedy • Drama • 1h 55m</p>
+              <button className="w-full bg-amber-500 hover:opacity-85 px-4 py-2 rounded-lg font-medium text-sm cursor-pointer">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+        </div>
 
       </section>
 
@@ -289,18 +375,121 @@ export default function LandingPage() {
         </p>
 
         {/* Service Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 sm:mt-12 max-w-6xl mx-auto">
+          
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=59842&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Easy Booking</h3>
+            <p className="text-gray-600 text-sm">Book your tickets in just a few clicks with our intuitive and user-friendly interface.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=85038&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Seat Selection</h3>
+            <p className="text-gray-600 text-sm">Choose your perfect seat with our interactive seat map and real-time availability.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=86207&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Secure Payments</h3>
+            <p className="text-gray-600 text-sm">Safe and secure payment options with instant confirmation for peace of mind.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=12580&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Mobile Tickets</h3>
+            <p className="text-gray-600 text-sm">Skip the lines with digital tickets delivered straight to your mobile device.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=85080&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">24/7 Support</h3>
+            <p className="text-gray-600 text-sm">Our dedicated support team is always ready to help you with any questions.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Personalized Recommendations</h3>
+            <p className="text-gray-600 text-sm">Get movie suggestions tailored to your preferences and viewing history.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=64096&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Watch Trailers</h3>
+            <p className="text-gray-600 text-sm">Preview movies before booking with high-quality trailers and video content.</p>
+          </div>
+
+          <div className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <img src="https://img.icons8.com/?size=100&id=85186&format=png&color=000000" alt="icon" className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Multiple Theaters</h3>
+            <p className="text-gray-600 text-sm">Access theaters across the country and find the best showtimes near you.</p>
+          </div>
+
+        </div>
       </section>
 
-      <section id="about" className="flex justify-center items-center flex-col px-8 lg:px-20 sm:px-12 mt-12 sm:mt-16 lg:mt-24 mx-auto">
+      <section id="about" className="flex justify-center bg-neutral-50 pt-20 items-center flex-col px-8 lg:px-20 sm:px-12 mt-12 sm:mt-16 lg:mt-24 mx-auto">
         <p className="text-sm px-2 py-1 rounded-3xl border border-neutral-200 mb-2 text-gray-600">Bringing the magic of cinema closer to you</p>
         <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-medium tracking-tight">About MAG</h1>
         <p className="mt-4 sm:mt-2 text-gray-600 font-medium max-w-xl sm:max-w-2xl text-sm sm:text-base text-center">MAG is a modern movie ticket booking platform that makes discovering movies, choosing seats, and booking tickets fast, easy, and hassle-free.</p>
-        <div className="flex">
-          <div>
-            {/* paragraph text */}
+        <div className="flex flex-col md:flex-row gap-8 mt-8 sm:mt-12 max-w-6xl w-full">
+          <div className="flex-1">
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Founded with a passion for cinema, MAG transforms the way you experience movies. We bring together cutting-edge technology and user-friendly design to create the ultimate movie booking experience.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Our platform offers seamless ticket booking, real-time seat selection, and instant confirmations. Whether you're planning a date night, family outing, or solo movie marathon, MAG makes it effortless.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We partner with theaters nationwide to bring you the widest selection of movies, from blockbuster hits to indie gems. Our user-friendly interface ensures you can browse, select, and book your perfect movie experience in minutes.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              With secure payment options, mobile ticketing, and personalized recommendations, we're committed to making every visit to the cinema memorable. No more waiting in long queues or missing out on sold-out shows.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Our dedicated customer support team is available 24/7 to assist you with any questions or concerns. We believe in transparency, reliability, and putting our customers first in everything we do.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              Join thousands of movie enthusiasts who trust MAG for their entertainment needs. Experience the future of movie booking today and discover why cinema lovers everywhere are choosing MAG as their go-to platform.
+            </p>
           </div>
-          <div>
-            {/* images sets */}
+          <div className="flex-1 grid grid-cols-2 gap-4">
+            <img 
+              src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop" 
+              alt="Cinema experience" 
+              className="rounded-lg object-cover w-full h-48 sm:h-56"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=800&auto=format&fit=crop" 
+              alt="Movie theater" 
+              className="rounded-lg object-cover w-full h-48 sm:h-56"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop" 
+              alt="Popcorn and movies" 
+              className="rounded-lg object-cover w-full h-48 sm:h-56"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=800&auto=format&fit=crop" 
+              alt="Cinema seats" 
+              className="rounded-lg object-cover w-full h-48 sm:h-56"
+            />
           </div>
         </div>
       </section>

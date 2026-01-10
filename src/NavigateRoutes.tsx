@@ -9,6 +9,8 @@ import GetMovieById from './pages/GetMovieById'
 import UserMovieByID from './pages/UserMovieByID'
 import FavouriteMovies from './pages/FavouriteMovies'
 import MyMovies from './pages/MyMovies'
+import BuyingMovies from './pages/BuyingMovies'
+import AdminBuyingMovies from './pages/AdminBuyingMovies'
 import ProtectedRoute from './component/ProtectedRoute'
 
 export default function NavigateRoutes() {
@@ -51,6 +53,14 @@ export default function NavigateRoutes() {
               </ProtectedRoute>
             }
           />
+          <Route 
+            path='/user/buying-movies' 
+            element={
+              <ProtectedRoute requiredRole="user">
+                <BuyingMovies />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Admin Routes - Protected */}
           <Route 
@@ -82,6 +92,14 @@ export default function NavigateRoutes() {
             element={
               <ProtectedRoute requiredRole="admin">
                 <GetMovieById />
+              </ProtectedRoute>
+            }
+          />
+          <Route 
+            path='/admin/buying-movies' 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminBuyingMovies />
               </ProtectedRoute>
             }
           />
