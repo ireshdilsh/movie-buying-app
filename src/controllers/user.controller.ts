@@ -392,3 +392,31 @@ export const getPurchasedMovies = async (req: Request, res: Response): Promise<v
     });
   }
 };
+
+// Admin: Get all purchases across all users
+export const getAllPurchases = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const purchases = await Purchase.find()
+      .populate('movieId')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      purchases: purchases.map(purchase => ({
+        email: purchase.email,
+        movie: purchase.movieId,
+        price: purchase.price,
+        purchaseDate: purchase.purchaseDate,
+        createdAt: purchase.createdAt,
+      })),
+      count: purchases.length,
+    });
+  } catch (error: any) {
+    console.error('Get all purchases error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching all purchases',
+      error: error.message,
+    });
+  }
+};

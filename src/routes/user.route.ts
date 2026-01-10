@@ -1,5 +1,6 @@
 import express from 'express';
-import { register, login, getMe, addToFavorites, removeFromFavorites, getFavoriteMovies, buyMovie, getPurchasedMovies } from '../controllers/user.controller';
+import { register, login, getMe, addToFavorites, removeFromFavorites, getFavoriteMovies, buyMovie, getPurchasedMovies, getAllPurchases } from '../controllers/user.controller';
+import { authenticate, authorize } from '../middlewares/auth';
 
 export const user_router = express.Router();
 
@@ -11,3 +12,4 @@ user_router.post('/favorites/remove', removeFromFavorites);
 user_router.get('/favorites', getFavoriteMovies);
 user_router.post('/purchase', buyMovie);
 user_router.get('/purchases', getPurchasedMovies);
+user_router.get('/purchases/all', authenticate, authorize('admin'), getAllPurchases);
