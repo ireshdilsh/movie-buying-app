@@ -37,7 +37,6 @@ export default function BuyingMovies() {
                 getAllMovies();
                 return;
             }
-
             const resp = await axios.get(`http://localhost:5000/api/movies/search?name=${searchQuery}`);
             console.log("Search results:", resp.data.movies);
             setmovie(resp.data.movies);
@@ -106,61 +105,55 @@ export default function BuyingMovies() {
                 <div className='flex gap-3 mt-6 flex-wrap justify-center items-center'>
                     <button
                         onClick={() => setSelectedGenre('all')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'all'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'all'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         All Movies
                     </button>
                     <button
                         onClick={() => setSelectedGenre('action')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'action'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'action'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         Action
                     </button>
                     <button
                         onClick={() => setSelectedGenre('drama')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'drama'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'drama'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         Drama
                     </button>
                     <button
                         onClick={() => setSelectedGenre('comedy')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'comedy'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'comedy'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         Comedy
                     </button>
                     <button
                         onClick={() => setSelectedGenre('thriller')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'thriller'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'thriller'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         Thriller
                     </button>
                     <button
                         onClick={() => setSelectedGenre('sci-fi')}
-                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${
-                            selectedGenre === 'sci-fi'
+                        className={`px-4 py-2 rounded-3xl text-sm font-medium transition-all cursor-pointer ${selectedGenre === 'sci-fi'
                                 ? 'bg-amber-500 text-white'
                                 : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                        }`}
+                            }`}
                     >
                         Sci-Fi
                     </button>
